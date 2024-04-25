@@ -11,7 +11,7 @@ subtracao = numero1 - numero2
 multiplicacao = numero1 * numero2
 divisao = numero1 / numero2
 
-
+    # EXIBIDNO RESULTADOS
 print(f"1º número: {numero1}")
 print(f"2º numero: {numero2}")
 print(f"soma: {soma}")
