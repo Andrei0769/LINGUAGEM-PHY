@@ -1,6 +1,6 @@
 # solicitando dados para o usuario 
 
-nome = inandreiput("Digite o seu nome: ")
+nome = input("Digite o seu nome: ")
 idade = input("Digite sua idade: ")
 peso = input("Digite seu peso: ")
 

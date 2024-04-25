@@ -11,9 +11,6 @@ subtracao = numero1 - numero2
 multiplicacao = numero1 * numero2
 divisao = numero1 / numero2
 
-import os
-
-os.system("cls || clear")
 
 print(f"1º número: {numero1}")
 print(f"2º numero: {numero2}")
