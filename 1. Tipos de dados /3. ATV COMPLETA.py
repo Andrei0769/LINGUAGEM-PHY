@@ -11,13 +11,13 @@ nota3 = float(input("Digite sua 3º nota: "))
 nota4 = float(input("Digite sua 4º nota: "))
 media = input
 
-# Média e Soma 
+# Média, soma multiplicação
 soma = nota1 + nota2 + nota3 + nota4
 multiplicacao = nota1 * nota2 * nota3 * nota4
 media = nota1 + nota2 + nota3 + nota4 / 4
 
 
-print("==== EXIBINDO RESULTADOS ====")
+print("==== EXIBINDO RESULTADOS ====" )
 print(f"Nome: {nome}")
 print(f"Idade: {idade}")
 print(f"1º nota: {nota1}")
