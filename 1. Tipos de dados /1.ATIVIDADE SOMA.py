@@ -15,7 +15,7 @@ divisao = numero1 / numero2
 print(f"1º número: {numero1}")
 print(f"2º numero: {numero2}")
 print(f"soma: {soma}")
-print(f"subtracao: {subtracao}")
-print(f"multiplicacao: {multiplicacao}")
-print(f"divisao: {divisao}")
+print(f"subtração: {subtracao}")
+print(f"multiplicação: {multiplicacao}")
+print(f"divisão: {divisao}")
 
