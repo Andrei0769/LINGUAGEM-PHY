@@ -1,6 +1,7 @@
 import os 
 
 os.system("cls || clear")
+
 mediaAritimetica = 0
 nota = 0 
 soma = 0

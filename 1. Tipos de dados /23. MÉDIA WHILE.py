@@ -8,7 +8,7 @@ soma = 0
 contador = 0
 
 # Primeira entrada de nota
-nota = int(input("Digite uma nota positiva (digite um número negativo para parar): "))
+nota = float(input("Digite uma nota positiva (digite um número negativo para parar): "))
 
 # Verificação para notas positivas e soma
 while nota >= 0:
