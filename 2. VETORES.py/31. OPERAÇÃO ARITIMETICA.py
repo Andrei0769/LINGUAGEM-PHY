@@ -11,7 +11,7 @@ def soma(primeiroNumero, segundoNumero):
     resultado = primeiroNumero + segundoNumero
     return resultado
 def multiplicacao(primeiroNumero,  segundoNumero):
-    resultado = primeiroNumero / segundoNumero
+    resultado = primeiroNumero * segundoNumero
     return resultado
 def divisao(primeiroNumero,  segundoNumero):
     resultado = primeiroNumero / segundoNumero
