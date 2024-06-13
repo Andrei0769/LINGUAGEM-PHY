@@ -1,14 +1,13 @@
 import os
 import math
-os.system("cls || clear")
 
 class SENAI:
     def clear_screen(self):
-        """Limpar a tela do console."""
-        os.system("cls || clear")
+        # Limpar a tela do console.
+        os.system("cls" if os.name == "nt" else "clear")
 
     def logo(self):
-        """Exibir o logo do SENAI."""
+        #Exibir o logo do SENAI.
         self.clear_screen()
         print(" === SENAI ===")
 
@@ -16,7 +15,6 @@ class SENAI:
         return peso / math.pow(altura, 2)
 
     def resultado_imc(self, imc):
-     
         if imc < 18.5:
             return "Muito magro"
         elif imc < 25:
@@ -31,15 +29,12 @@ class SENAI:
             return "Obesidade grau III (mórbida)"
 
     def coletar_dados_usuario(self):
-        """
-        Coleta os dados do usuário, incluindo nome, sobrenome, idade, altura e peso.
-        
-        Returns:
-            tuple: Uma tupla contendo os dados do usuário.
-        """
         nome = input("Digite o nome do usuário (ou digite 'sair' para encerrar): ")
+        
         if nome.lower() == 'sair':
+            print("Consulta de IMC Finalizada!!")
             return None
+
         sobrenome = input("Digite o sobrenome do usuário: ")
         idade = int(input("Digite a idade do usuário: "))
         altura = float(input("Digite a altura do usuário (em metros): "))
@@ -56,26 +51,23 @@ class SENAI:
         print()
 
     def executar(self):
-        """Executa o programa."""
-        nomes = []
-        sobrenomes = []
-        idades = []
-        alturas = []
-        pesos = []
+        # Executa o programa.
+        usuarios = {}
         while True:
             self.logo()
             dados_usuario = self.coletar_dados_usuario()
             if dados_usuario is None:
                 break
             nome, sobrenome, idade, altura, peso = dados_usuario
-            nomes.append(nome)
-            sobrenomes.append(sobrenome)
-            idades.append(idade)
-            alturas.append(altura)
-            pesos.append(peso)
             imc = self.calcular_imc(peso, altura)
             resultado_imc = self.resultado_imc(imc)
-            self.exibir_dados_usuario((nome, sobrenome, idade, altura, peso))
+            usuarios[nome] = (nome, sobrenome, idade, altura, peso)
+            self.exibir_dados_usuario(usuarios[nome])
             print("IMC:", imc)
             print("Resultado:", resultado_imc)
-            input("Pressione Enter para continuar...")
+            continuar = input("Deseja inserir outro usuário? (s/n): ")
+            if continuar.lower() != 's':
+                print("Consulta de IMC Finalizada, Muito Obrigado")
+                break
+
+SENAI().executar()
