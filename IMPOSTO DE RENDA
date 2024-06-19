@@ -4,7 +4,14 @@ def solicitar_dados_funcionario():
     salario_base = float(input("Digite o salário base do funcionário (R$): "))
     vale_transporte_opcao = input("O funcionário deseja receber vale transporte? (s/n): ").lower()
     vale_refeicao_valor = float(input("Digite o valor do vale refeição fornecido pela empresa (R$): "))
-    return matricula, senha, salario_base, vale_transporte_opcao, vale_refeicao_valor
+    tem_dependentes = input("O funcionário possui dependentes? (s/n): ").lower()
+    
+    if tem_dependentes == 's':
+        num_dependentes = int(input("Quantos dependentes o funcionário possui? "))
+    else:
+        num_dependentes = 0
+    
+    return matricula, senha, salario_base, vale_transporte_opcao, vale_refeicao_valor, num_dependentes
 
 def calcular_inss(salario_base):
     if salario_base <= 1100.00:
@@ -51,10 +58,10 @@ def calcular_salario_liquido(salario_base, inss, irrf, vt, vr, plano_saude):
     return salario_base - (inss + irrf + vt + vr + plano_saude)
 
 def main():
-    matricula, senha, salario_base, vale_transporte_opcao, vale_refeicao_valor = solicitar_dados_funcionario()
+    matricula, senha, salario_base, vale_transporte_opcao, vale_refeicao_valor, num_dependentes = solicitar_dados_funcionario()
     
     inss = calcular_inss(salario_base)
-    irrf = calcular_irrf(salario_base)
+    irrf = calcular_irrf(salario_base, num_dependentes)
     vale_transporte = calcular_vale_transporte(salario_base, vale_transporte_opcao)
     vale_refeicao = calcular_vale_refeicao(vale_refeicao_valor)
     plano_saude = calcular_plano_saude()
