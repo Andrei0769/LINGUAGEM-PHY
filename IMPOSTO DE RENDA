@@ -33,13 +33,13 @@ def calcular_irrf(salario_base, num_dependentes=1):
     if base_calculo <= 2259.20:
         desconto_irrf = 0
     elif base_calculo <= 2826.65:
-        desconto_irrf = base_calculo * 0.075 - 171.65
+        desconto_irrf = base_calculo * 0.075 - 169.32
     elif base_calculo <= 3751.05:
-        desconto_irrf = base_calculo * 0.15 - 354.80
+        desconto_irrf = base_calculo * 0.15 - 422.80
     elif base_calculo <= 4664.68:
-        desconto_irrf = base_calculo * 0.225 - 636.13
+        desconto_irrf = base_calculo * 0.225 - 763.20
     else:
-        desconto_irrf = base_calculo * 0.275 - 869.36
+        desconto_irrf = base_calculo * 0.275 - 1042.33
     
     return max(0, desconto_irrf)  # O desconto não pode ser negativo
 
