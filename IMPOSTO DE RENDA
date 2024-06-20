@@ -1,19 +1,5 @@
 num_dependentes = 0
-
-def solicitar_dados_funcionario():
-    matricula = input("Digite a matrícula do funcionário: ")
-    senha = input("Digite a senha do funcionário: ")
-    salario_base = float(input("Digite o salário base do funcionário (R$): "))
-    vale_transporte_opcao = input("O funcionário deseja receber vale transporte? (s/n): ").lower()
-    vale_refeicao_valor = float(input("Digite o valor do vale refeição fornecido pela empresa (R$): "))
-    tem_dependentes = input("O funcionário possui dependentes? (s/n): ").lower()
-    
-    if tem_dependentes == 's':
-        num_dependentes = int(input("Quantos dependentes o funcionário possui? "))
-    else:
-        num_dependentes = 0
-    
-    return matricula, senha, salario_base, vale_transporte_opcao, vale_refeicao_valor, num_dependentes
+#solicitar_dados_funcionario
 
 def calcular_inss(salario_base):
     if salario_base <= 1100.00:
@@ -25,18 +11,11 @@ def calcular_inss(salario_base):
     elif salario_base <= 6433.57:
         desconto_inss = salario_base * 0.14
     else:
-        desconto_inss = salario_base * 0.14
-        
-    if desconto_inss > 854.36:
         desconto_inss = 854.36
-    
     return desconto_inss
-def verificar_dependentes (irrf):
-    if num_dependentes != 0:
-        irrfs = irrf - (189.59 * num_dependentes)
-    return irrfs
-        
-def calcular_irrf(salario_base, num_dependentes=1):
+
+
+def calcular_irrf(salario_base):
     if salario_base <= 2259.20:
         desconto_irrf = 0
     elif salario_base <= 2826.65:
@@ -48,40 +27,48 @@ def calcular_irrf(salario_base, num_dependentes=1):
     else:
         desconto_irrf = salario_base * 0.275
     
-    return max(0, desconto_irrf)  # O desconto não pode ser negativo
+    return desconto_irrf
 
-def calcular_vale_transporte(salario_base, opcao_vale_transporte):
-    if opcao_vale_transporte == 's':
-        return salario_base * 0.06
-    return 0
-
+def calcular_vale_transporte(salario_base):
+    return salario_base * 0.06
+    
 def calcular_vale_refeicao(vale_refeicao_valor):
     return vale_refeicao_valor * 0.20
 
-def calcular_plano_saude():
-    return 150.00
+def calcular_salario_liquido(salario_base, inss, irrf, ded_dependente, vt, vr):
+    return salario_base - (inss + (irrf - ded_dependente) + vt + vr + 150)
 
-def calcular_salario_liquido(salario_base, inss, irrf, vt, vr, plano_saude):
-    return salario_base - (inss + irrf + vt + vr + plano_saude)
+matricula = input("Digite a matrícula do funcionário: ")
+senha = input("Digite a senha do funcionário: ")
+salario_base = float(input("Digite o salário base do funcionário (R$): "))
+vale_transporte_opcao = input("O funcionário deseja receber vale transporte? (s/n): ").lower()
+if vale_transporte == "s":
+    final_transporte = calcular_vale_transporte(salario_base)
+else: 
+    final_transporte = 0 
+    
+vale_refeicao_valor = float(input("Digite o valor do vale refeição fornecido pela empresa (R$): "))
 
-def main():
-    matricula, senha, salario_base, vale_transporte_opcao, vale_refeicao_valor, num_dependentes = solicitar_dados_funcionario()
+tem_dependentes = input("O funcionário possui dependentes? (s/n): ").lower()
+
+    if tem_dependentes == 's':
+        num_dependentes = int(input("Quantos dependentes o funcionário possui? "))
+        ded_dependente = 189.59 * num_dependentes
+    else:
+        ded_dependente = 0
+
     
     inss = calcular_inss(salario_base)
-    irrf = calcular_irrf(salario_base, num_dependentes)
-    vale_transporte = calcular_vale_transporte(salario_base, vale_transporte_opcao)
+    irrf = calcular_irrf(salario_base)
     vale_refeicao = calcular_vale_refeicao(vale_refeicao_valor)
-    plano_saude = calcular_plano_saude()
-    salario_liquido = calcular_salario_liquido(salario_base, inss, irrf, vale_transporte, vale_refeicao, plano_saude)
-    irrfs = verificar_dependentes(irrf)
-    
+    salario_liquido = calcular_salario_liquido(salario_base, inss, irrf, ded_dependente, vale_transporte, vale_refeicao)
+        
     print("\nResumo da Folha de Pagamento:")
     print(f"Salário Base: R$ {salario_base:.2f}")
     print(f"Desconto INSS: R$ {inss:.2f}")
-    print(f"Desconto IRRF: R$ {irrfs:.2f}")
+    print(f"Desconto IRRF: R$ {irrf:.2f}")
     print(f"Desconto Vale Transporte: R$ {vale_transporte:.2f}")
     print(f"Desconto Vale Refeição: R$ {vale_refeicao:.2f}")
-    print(f"Desconto Plano de Saúde: R$ {plano_saude:.2f}")
     print(f"Salário Líquido: R$ {salario_liquido:.2f}")
     
 # Chamada direta da função main()
